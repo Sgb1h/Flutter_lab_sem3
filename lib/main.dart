@@ -10,12 +10,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      debugShowCheckedModeBanner: false,
+      title: 'Categories',
+      home: const MyHomePage(title: 'BROWSE CATEGORIES'),
     );
   }
 }
@@ -30,42 +27,114 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  double _counter = 0.0;
-
-  //Test
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text(widget.title,
+        style: TextStyle(
+          fontSize:25.0,
+          color: Colors.black,
+          fontWeight: FontWeight.bold,
+          letterSpacing: 2.0,
+        ),
+        ),
+        centerTitle: true,
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              'Not sure about what exactly which you are looking for? Do a search, or dive in to our most popular categories',
+              style: TextStyle(
+                fontSize: 17.0,
+              ),
+            ),
+            SizedBox(height: 25.0),
+            Text(
+              'BY MEAT',
+              style: TextStyle(
+                fontSize:19.0,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 2.0,
+              ),
+            ),
+            SizedBox(height: 20.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: <Widget>[
+                CircleAvatar(
+                  radius: 70.0,
+                  backgroundImage: AssetImage('images/beef.jpg'),
+                ),
+                    Text("BEEF",
+                      style: TextStyle(fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        letterSpacing: 1.0,
+                      ),
+                    ),
+                  ],
+                ),
+                Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 70.0,
+                      backgroundImage: AssetImage('images/chicken.jpg'),
+                    ),
+                    Text("CHICKEN",
+                      style: TextStyle(fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        letterSpacing: 1.0,
+                      ),
+                    ),
+                  ],
+                ),
+                Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 70.0,
+                      backgroundImage: AssetImage('images/pork.jpg'),
+                    ),
+                    Text("PORK",
+                      style: TextStyle(fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        letterSpacing: 1.0,
+                      ),
+                    ),
+                  ],
+                ),
+                Stack(
+                  alignment: AlignmentDirectional.center,
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 70.0,
+                      backgroundImage: AssetImage('images/seafood.jpg'),
+                    ),
+                    Text("SEAFOOD",
+                      style: TextStyle(fontSize: 30.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        letterSpacing: 1.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), 
     );
   }
 }
