@@ -70,11 +70,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   alignment: AlignmentDirectional.center,
                   children: <Widget>[
                 CircleAvatar(
-                  radius: 70.0,
+                  radius: 60.0,
                   backgroundImage: AssetImage('images/beef.jpg'),
                 ),
                     Text("BEEF",
-                      style: TextStyle(fontSize: 30.0,
+                      style: TextStyle(fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         letterSpacing: 1.0,
@@ -86,11 +86,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   alignment: AlignmentDirectional.center,
                   children: <Widget>[
                     CircleAvatar(
-                      radius: 70.0,
+                      radius: 60.0,
                       backgroundImage: AssetImage('images/chicken.jpg'),
                     ),
                     Text("CHICKEN",
-                      style: TextStyle(fontSize: 30.0,
+                      style: TextStyle(fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         letterSpacing: 1.0,
@@ -102,11 +102,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   alignment: AlignmentDirectional.center,
                   children: <Widget>[
                     CircleAvatar(
-                      radius: 70.0,
+                      radius: 60.0,
                       backgroundImage: AssetImage('images/pork.jpg'),
                     ),
                     Text("PORK",
-                      style: TextStyle(fontSize: 30.0,
+                      style: TextStyle(fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         letterSpacing: 1.0,
@@ -118,11 +118,11 @@ class _MyHomePageState extends State<MyHomePage> {
                   alignment: AlignmentDirectional.center,
                   children: <Widget>[
                     CircleAvatar(
-                      radius: 70.0,
+                      radius: 60.0,
                       backgroundImage: AssetImage('images/seafood.jpg'),
                     ),
                     Text("SEAFOOD",
-                      style: TextStyle(fontSize: 30.0,
+                      style: TextStyle(fontSize: 20.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         letterSpacing: 1.0,
@@ -132,7 +132,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            SizedBox(height: 25.0),
+            SizedBox(height: 10.0),
             Text(
               'BY COURSE',
               style: TextStyle(
@@ -142,7 +142,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 letterSpacing: 2.0,
               ),
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 10.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -150,7 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     CircleAvatar(
-                      radius: 70.0,
+                      radius: 60.0,
                       backgroundImage: AssetImage('images/maindishes.jpg'),
                     ),
                     SizedBox(height: 7.0),
@@ -167,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     CircleAvatar(
-                      radius: 70.0,
+                      radius: 60.0,
                       backgroundImage: AssetImage('images/salad.jpg'),
                     ),
                     SizedBox(height: 7.0),
@@ -184,7 +184,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     CircleAvatar(
-                      radius: 70.0,
+                      radius: 60.0,
                       backgroundImage: AssetImage('images/side.jpg'),
                     ),
                     SizedBox(height: 7.0),
@@ -201,7 +201,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     CircleAvatar(
-                      radius: 70.0,
+                      radius: 60.0,
                       backgroundImage: AssetImage('images/crockpot.jpg'),
                     ),
                     SizedBox(height: 7.0),
@@ -216,9 +216,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            SizedBox(height: 25.0),
+            SizedBox(height: 10.0),
             Text(
-              'BY COURSE',
+              'BY DESSERT',
               style: TextStyle(
                 fontSize:19.0,
                 color: Colors.black,
@@ -226,7 +226,80 @@ class _MyHomePageState extends State<MyHomePage> {
                 letterSpacing: 2.0,
               ),
             ),
-            SizedBox(height: 20.0),
+            SizedBox(height: 10.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 60.0,
+                      backgroundImage: AssetImage('images/ice.jpg'),
+                    ),
+                    SizedBox(height: 7.0),
+                    Text("Ice Cream",
+                      style: TextStyle(fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        letterSpacing: 1.0,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 60.0,
+                      backgroundImage: AssetImage('images/brownies.jpg'),
+                    ),
+                    SizedBox(height: 7.0),
+                    Text("Brownies",
+                      style: TextStyle(fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        letterSpacing: 1.0,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 60.0,
+                      backgroundImage: AssetImage('images/pies.jpg'),
+                    ),
+                    SizedBox(height: 7.0),
+                    Text("Pies",
+                      style: TextStyle(fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        letterSpacing: 1.0,
+                      ),
+                    ),
+                  ],
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    CircleAvatar(
+                      radius: 60.0,
+                      backgroundImage: AssetImage('images/cookies.jpg'),
+                    ),
+                    SizedBox(height: 7.0),
+                    Text("Cookies",
+                      style: TextStyle(fontSize: 15.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        letterSpacing: 1.0,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ],
         ),
       ),
