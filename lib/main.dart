@@ -216,6 +216,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
+            SizedBox(height: 25.0),
+            Text(
+              'BY COURSE',
+              style: TextStyle(
+                fontSize:19.0,
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 2.0,
+              ),
+            ),
+            SizedBox(height: 20.0),
           ],
         ),
       ),
