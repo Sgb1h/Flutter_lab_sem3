@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -44,15 +45,16 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
+            Spacer(),
             Text(
               'Not sure about what exactly which you are looking for? Do a search, or dive in to our most popular categories',
               style: TextStyle(
                 fontSize: 17.0,
               ),
             ),
-            SizedBox(height: 25.0),
+            Spacer(),
             Text(
               'BY MEAT',
               style: TextStyle(
@@ -62,7 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 letterSpacing: 2.0,
               ),
             ),
-            SizedBox(height: 20.0),
+            Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
@@ -132,7 +134,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            SizedBox(height: 10.0),
+            Spacer(),
             Text(
               'BY COURSE',
               style: TextStyle(
@@ -142,19 +144,18 @@ class _MyHomePageState extends State<MyHomePage> {
                 letterSpacing: 2.0,
               ),
             ),
-            SizedBox(height: 10.0),
+            Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                Stack(
+                  alignment: AlignmentDirectional.bottomCenter,
                   children: <Widget>[
                     CircleAvatar(
                       radius: 60.0,
                       backgroundImage: AssetImage('images/maindishes.jpg'),
                     ),
-                    SizedBox(height: 7.0),
-                    Text("Main dishes",
+                    Text("Main Dishes",
                       style: TextStyle(fontSize: 15.0,
                         fontWeight: FontWeight.bold,
                         color: Colors.black,
@@ -163,8 +164,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                Stack(
+                  alignment: AlignmentDirectional.bottomCenter,
                   children: <Widget>[
                     CircleAvatar(
                       radius: 60.0,
@@ -180,8 +181,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                Stack(
+                  alignment: AlignmentDirectional.bottomCenter,
                   children: <Widget>[
                     CircleAvatar(
                       radius: 60.0,
@@ -197,8 +198,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                Stack(
+                  alignment: AlignmentDirectional.bottomCenter,
                   children: <Widget>[
                     CircleAvatar(
                       radius: 60.0,
@@ -216,7 +217,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ),
               ],
             ),
-            SizedBox(height: 10.0),
+            Spacer(),
             Text(
               'BY DESSERT',
               style: TextStyle(
@@ -226,12 +227,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 letterSpacing: 2.0,
               ),
             ),
-            SizedBox(height: 10.0),
+            Spacer(),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                Stack(
+                  alignment: AlignmentDirectional.bottomCenter,
                   children: <Widget>[
                     CircleAvatar(
                       radius: 60.0,
@@ -247,8 +248,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                Stack(
+                  alignment: AlignmentDirectional.bottomCenter,
                   children: <Widget>[
                     CircleAvatar(
                       radius: 60.0,
@@ -264,8 +265,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                Stack(
+                  alignment: AlignmentDirectional.bottomCenter,
                   children: <Widget>[
                     CircleAvatar(
                       radius: 60.0,
@@ -281,8 +282,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                   ],
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                Stack(
+                  alignment: AlignmentDirectional.bottomCenter,
                   children: <Widget>[
                     CircleAvatar(
                       radius: 60.0,
