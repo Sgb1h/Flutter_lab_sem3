@@ -287,7 +287,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     CircleAvatar(
                       radius: 60.0,
-                      backgroundImage: AssetImage('images/cookies.jpg'),
+                      backgroun dImage: AssetImage('images/cookies.jpg'),
                     ),
                     SizedBox(height: 7.0),
                     Text("Cookies",
