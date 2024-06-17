@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'OtherPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,34 +28,36 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomePage> createState() => MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  late TextEditingController controller1;
-  late TextEditingController controller2;
+class MyHomePageState extends State<MyHomePage> {
+  late TextEditingController usernameController;
+  late TextEditingController passwordController;
   var imageSource = "Images/question.png";
   late SharedPreferences prefs;
 
   @override
   void initState() {
     super.initState();
-    controller1 = TextEditingController();
-    controller2 = TextEditingController();
+    usernameController = TextEditingController();
+    passwordController = TextEditingController();
     initializeSharedPreferences();
   }
 
-  void initializeSharedPreferences() async {
-    prefs = await SharedPreferences.getInstance();
-    loadCredentials();
+  void initializeSharedPreferences() {
+    SharedPreferences.getInstance().then((preferences) {
+      prefs = preferences;
+      loadCredentials();
+    });
   }
 
   void loadCredentials() {
     String? savedUsername = prefs.getString('username');
     String? savedPassword = prefs.getString('password');
     if (savedUsername != null && savedPassword != null) {
-      controller1.text = savedUsername;
-      controller2.text = savedPassword;
+      usernameController.text = savedUsername;
+      passwordController.text = savedPassword;
       showSnackbar();
     }
   }
@@ -71,8 +73,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   void onClick() {
-    String pass = controller2.text;
-    if (pass == "QWERTY123") {
+    String password = passwordController.text;
+    if (password == "QWERTY123") {
       setState(() {
         imageSource = "Images/idea.png";
       });
@@ -84,11 +86,11 @@ class _MyHomePageState extends State<MyHomePage> {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                saveCredentials(controller1.text, controller2.text);
+                saveCredentials(usernameController.text, passwordController.text);
                 Navigator.pop(context, 'Yes');
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ProfilePage(username: controller1.text)),
+                  MaterialPageRoute(builder: (context) => OtherPage(username: usernameController.text)),
                 );
               },
               child: const Text('Yes'),
@@ -103,7 +105,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       );
-    } else if (pass == "") {
+    } else if (password == "") {
       setState(() {
         imageSource = "Images/question.png";
       });
@@ -121,8 +123,8 @@ class _MyHomePageState extends State<MyHomePage> {
         label: 'Clear Saved Data',
         onPressed: () {
           clearCredentials();
-          controller1.clear();
-          controller2.clear();
+          usernameController.clear();
+          passwordController.clear();
         },
       ),
     );
@@ -141,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             TextField(
-              controller: controller1,
+              controller: usernameController,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: "Login",
@@ -149,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             const SizedBox(height: 10),
             TextField(
-              controller: controller2,
+              controller: passwordController,
               obscureText: true,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
@@ -171,173 +173,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   void dispose() {
-    controller1.dispose();
-    controller2.dispose();
+    usernameController.dispose();
+    passwordController.dispose();
     super.dispose();
-  }
-}
-
-class ProfilePage extends StatefulWidget {
-  final String username;
-
-  const ProfilePage({Key? key, required this.username}) : super(key: key);
-
-  @override
-  _ProfilePageState createState() => _ProfilePageState();
-}
-
-class _ProfilePageState extends State<ProfilePage> {
-  late TextEditingController firstNameController;
-  late TextEditingController lastNameController;
-  late TextEditingController phoneNumberController;
-  late TextEditingController emailController;
-  late SharedPreferences prefs;
-
-  @override
-  void initState() {
-    super.initState();
-    firstNameController = TextEditingController();
-    lastNameController = TextEditingController();
-    phoneNumberController = TextEditingController();
-    emailController = TextEditingController();
-    initializeSharedPreferences();
-  }
-
-  void initializeSharedPreferences() async {
-    prefs = await SharedPreferences.getInstance();
-    loadData();
-  }
-
-  void loadData() {
-    setState(() {
-      firstNameController.text = prefs.getString('firstName') ?? '';
-      lastNameController.text = prefs.getString('lastName') ?? '';
-      phoneNumberController.text = prefs.getString('phoneNumber') ?? '';
-      emailController.text = prefs.getString('email') ?? '';
-    });
-  }
-
-  void saveData() {
-    prefs.setString('firstName', firstNameController.text);
-    prefs.setString('lastName', lastNameController.text);
-    prefs.setString('phoneNumber', phoneNumberController.text);
-    prefs.setString('email', emailController.text);
-  }
-
-  Future<void> _launchURL(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      showDialog(
-        context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Error'),
-          content: Text('This URL is not supported on your device'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text('OK'),
-            ),
-          ],
-        ),
-      );
-    }
-  }
-
-  @override
-  void dispose() {
-    saveData();
-    firstNameController.dispose();
-    lastNameController.dispose();
-    phoneNumberController.dispose();
-    emailController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Profile Page'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: <Widget>[
-            TextField(
-              controller: firstNameController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "First Name",
-              ),
-            ),
-            const SizedBox(height: 10),
-            TextField(
-              controller: lastNameController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: "Last Name",
-              ),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                Flexible(
-                  child: TextField(
-                    controller: phoneNumberController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Phone Number",
-                    ),
-                  ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.phone),
-                  onPressed: () {
-                    _launchURL('tel:${phoneNumberController.text}');
-                  },
-                ),
-                IconButton(
-                  icon: Icon(Icons.message),
-                  onPressed: () {
-                    _launchURL('sms:${phoneNumberController.text}');
-                  },
-                ),
-              ],
-            ),
-            const SizedBox(height: 10),
-            Row(
-              children: [
-                Flexible(
-                  child: TextField(
-                    controller: emailController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Email Address",
-                    ),
-                  ),
-                ),
-                IconButton(
-                  icon: Icon(Icons.email),
-                  onPressed: () {
-                    _launchURL('mailto:${emailController.text}');
-                  },
-                ),
-              ],
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                saveData();
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Data saved successfully')),
-                );
-              },
-              child: Text('Save'),
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }
