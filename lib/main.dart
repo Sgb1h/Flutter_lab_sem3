@@ -1,11 +1,19 @@
+import 'package:floor/floor.dart';
 import 'package:flutter/material.dart';
+import 'Database.dart';
+import 'Task.dart';
+import 'Task_dao.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final database = await $FloorAppDatabase.databaseBuilder('app_database.db').build();
+  runApp(MyApp(database: database));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final AppDatabase database;
+
+  const MyApp({Key? key, required this.database}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,16 +23,17 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Listview'),
+      home: MyHomePage(title: 'Listview', database: database),
       debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
   final String title;
+  final AppDatabase database;
+
+  const MyHomePage({Key? key, required this.title, required this.database}) : super(key: key);
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -32,12 +41,13 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   late TextEditingController controller;
-  List<String> items = [];
+  List<Task> items = [];
 
   @override
   void initState() {
     super.initState();
     controller = TextEditingController();
+    loadTasks();
   }
 
   @override
@@ -46,16 +56,20 @@ class _MyHomePageState extends State<MyHomePage> {
     super.dispose();
   }
 
-  void addItem() {
+  void addItem() async {
     if (controller.text.isNotEmpty) {
+      final task = Task(items.length + 1, controller.text);
+      await widget.database.taskDao.insertTask(task);
       setState(() {
-        items.add(controller.text);
+        items.add(task);
         controller.clear();
       });
     }
   }
 
-  void removeItem(int index) {
+  void removeItem(int index) async {
+    final task = items[index];
+    await widget.database.taskDao.deleteTask(task);
     setState(() {
       items.removeAt(index);
     });
@@ -86,6 +100,13 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       },
     );
+  }
+
+  void loadTasks() async {
+    final tasks = await widget.database.taskDao.findAllTasks();
+    setState(() {
+      items = tasks;
+    });
   }
 
   @override
@@ -134,7 +155,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text('Row number: $index'),
-                          Text(items[index]),
+                          Text(items[index].name),
                         ],
                       ),
                     ),
